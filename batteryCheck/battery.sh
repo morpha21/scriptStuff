@@ -1,8 +1,10 @@
 #!/bin/bash
 
+dunst &
 
 while [ true ]
 do 
+	sleep 6
 	battery=$(acpi | awk -F", " '{print$2}' | sed 's/%//g') 
 	if [ $battery -le 6 ]
 	then
@@ -12,5 +14,6 @@ do
 	elif [ $battery -le 28 ]
 	then
 		notify-send "recharge is needed" "battery level is $battery"
+		sleep 120
 	fi
 done
